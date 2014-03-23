@@ -3,6 +3,9 @@
 ## generate torrents for all files in /var/www/mirrors/torproject.org/dist 
 ## destination: /var/www/mirrors/torrents/
 
+SOURCE=/patch/to/files/
+DEST=/patch/to/torrentsfiles/
+
 ## requires mktorrent
 
 MIRRORS='
@@ -29,7 +32,7 @@ http://theonionrouter.com/dist/,
 TRACKERS=udp://tracker.openbittorrent.com:80/announce,udp://tracker.publicbt.com:80/announce,http://tracker.openbittorrent.com:80/announce,http://tracker.publicbt.com:80/announce,udp://tracker.ccc.de/announce
 
 MIRRORS=`echo $MIRRORS | tr -d '\n' | tr -d '[:space:]'`
-cd /var/www/mirrors/torproject.org/dist
+cd $SOURCE
 for file in `find . -type f`
 do
  path=${file%/*}
@@ -38,6 +41,6 @@ do
  FILEMIRRORS=${MIRRORS//\/,/$path\/$name,}  #replace /, by $path/$name,
 
  echo Processing $path/$name
- mkdir -p /var/www/mirrors/torrents/$path
- /usr/bin/mktorrent -a $TRACKERS -w $FILEMIRRORS $file -o /var/www/mirrors/torrents/$file.torrent -c "created by www.torservers.net" 
+ mkdir -p $DEST/$path
+ /usr/bin/mktorrent -a $TRACKERS -w $FILEMIRRORS $file -o $DEST/$file.torrent -c "created by www.torservers.net" 
 done
