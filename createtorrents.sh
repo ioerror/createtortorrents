@@ -3,8 +3,8 @@
 ## generate torrents for all files in /var/www/mirrors/torproject.org/dist 
 ## destination: /var/www/mirrors/torrents/
 
-SOURCE=/patch/to/files/
-DEST=/patch/to/torrentsfiles/
+SOURCE=/var/www/mirrors/torproject.org/dist
+DEST=/var/www/mirrors/torrents/
 
 ## requires mktorrent
 
